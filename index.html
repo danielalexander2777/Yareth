@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Liszeth</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: radial-gradient(circle, #ffe3ec, #ffb3c6);
+            margin: 0;
+            padding: 100px 20px;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 40px;
+            text-shadow: 2px 2px 4px #00000040;
+        }
+        .btn {
+            padding: 12px 24px;
+            margin: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 8px #00000033;
+        }
+        .yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .no {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="question">¿Quieres ir a cenar conmigo?</h1>
+    <button class="btn yes" onclick="location.href='gracias.html'" id="yesBtn">Sí </button>
+    <button class="btn no" onclick="handleNoClick()" id="noBtn">No</button>
+
+    <script>
+        let noClicks = 0;
+        const frases = [
+            "¿Quieres ir a cenar conmigo?",
+            "¿Quieres ir a cenar conmigo? Por favor",
+            "Vamos, solo será una cena",
+            "plissssss",
+            "Te prometo que será divertido",
+            "ya, entiendo ...¿Pero segura?",
+            "¿Segura que no quieres cenar conmigo?",
+            "ahhhhhh, ok ._.",
+        ];
+
+        function handleNoClick() {
+            noClicks++;
+
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const question = document.getElementById('question');
+
+            if (noClicks < frases.length) {
+                question.innerText = frases[noClicks];
+           } else {
+                question.innerText = "Ya no sé qué más decirte 😞";
+            }
+            let noSize = Math.max(18 - noClicks, 4);
+            noBtn.style.fontSize = `${noSize}px`;
+
+            let yesSize = Math.min(18 + noClicks, 36);
+            yesBtn.style.fontSize = `${yesSize}px`;
+        }
+    </script>
+</body>
+</html>
