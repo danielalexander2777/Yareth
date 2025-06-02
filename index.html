@@ -10,6 +10,7 @@
             background: radial-gradient(circle, #ffe3ec, #ffb3c6);
             margin: 0;
             padding: 100px 20px;
+            cursor: url('cursor.webp'), auto;
         }
         h1 {
             color: #d63384;
@@ -25,6 +26,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 2px 2px 8px #00000033;
+            position: relative;
         }
         .yes {
             background-color: #4CAF50;
@@ -33,14 +35,26 @@
         .no {
             background-color: #f44336;
             color: white;
+            position: absolute;
+        }
+        .imagen-cena {
+            width: 220px;
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 4px 4px 12px #00000033;
+            transition: transform 0.3s ease;
+        }
+        .imagen-cena:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
     <h1 id="question">¿Quieres ir a cenar conmigo?</h1>
-    <button class="btn yes" onclick="location.href='gracias.html'" id="yesBtn">Sí </button>
-    <button class="btn no" onclick="handleNoClick()" id="noBtn">No</button>
-
+    <button class="btn yes" onclick="location.href='gracias.html'" id="yesBtn">Sí</button>
+    <button class="btn no" onclick="handleNoClick()" id="noBtn">No</button>  
+    <br>
+    <center><img src="flores.webp" alt="Florcitas" class="imagen-cena"></center>
     <script>
         let noClicks = 0;
         const frases = [
@@ -52,25 +66,50 @@
             "ya, entiendo ...¿Pero segura?",
             "¿Segura que no quieres cenar conmigo?",
             "ahhhhhh, ok ._.",
+            "no seas mala 😭",
         ];
+
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const question = document.getElementById('question');
+
+        let moveSpeed = 1;
+        let moveInterval;
 
         function handleNoClick() {
             noClicks++;
 
-            const noBtn = document.getElementById('noBtn');
-            const yesBtn = document.getElementById('yesBtn');
-            const question = document.getElementById('question');
-
             if (noClicks < frases.length) {
                 question.innerText = frases[noClicks];
-           } else {
+            } else {
                 question.innerText = "Ya no sé qué más decirte 😞";
             }
+
             let noSize = Math.max(18 - noClicks, 4);
             noBtn.style.fontSize = `${noSize}px`;
-
             let yesSize = Math.min(18 + noClicks, 36);
             yesBtn.style.fontSize = `${yesSize}px`;
+
+            const randomX = Math.random() * (window.innerWidth - 100);
+            const randomY = Math.random() * (window.innerHeight - 200);
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+
+            if (noClicks === 3) {
+                startMovingNoBtn();
+            } else if (noClicks > 3) {
+                moveSpeed += 0.5;
+            }
+        }    
+
+        function startMovingNoBtn() {
+            if (moveInterval) clearInterval(moveInterval);
+            moveInterval = setInterval(() => {
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 200);
+                noBtn.style.left = `${x}px`;
+                noBtn.style.top = `${y}px`;
+            }, 1000 / moveSpeed);
         }
     </script>
 </body>
