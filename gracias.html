@@ -10,24 +10,98 @@
             background: radial-gradient(circle, #ffe3ec, #ffb3c6);
             margin: 0;
             padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+            cursor: url('cursor.webp'), auto;
         }
+
         h1 {
             color: #d63384;
-            font-size: 38px;
-            text-shadow: 1px 1px 3px #00000030;
+            font-size: 44px;
+            text-shadow: 2px 2px 6px #00000025;
+            animation: fadeIn 2s ease-out;
         }
+
         p {
-            font-size: 20px;
+            font-size: 22px;
             color: #6f42c1;
+            margin-bottom: 30px;
+            animation: fadeIn 3s ease-out;
         }
+
         .emoji {
             font-size: 60px;
-            margin-top: 20px;
+            animation: bounce 1.2s infinite alternate;
+        }
+
+        .btn {
+            margin-top: 30px;
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            box-shadow: 2px 2px 8px #00000033;
+        }
+
+        .btn:hover {
+            background-color: #388e3c;
+        }
+
+        /* Animaciones */
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Corazones de fondo */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('cursor.webp') no-repeat center;
+            background-size: contain;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>¡Grashas!<h1>
-    <p>Entonces tienes que venir a buscarme a mi aula</p>
+    <h1>¡Grashas!</h1>
+    <p>Ahora tienes que venir a buscarme :D (estoy en mi aula)</p>
+    <center><img src="cursor.webp" alt="cozarón" class="imagen-cena"></center>
+    <button class="btn" onclick="location.href='index.html'">Volver al inicio</button>
+
+    <!-- Corazones animados -->
+    <script>
+        for (let i = 0; i < 15; i++) {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(heart);
+        }
+    </script>
 </body>
 </html>
